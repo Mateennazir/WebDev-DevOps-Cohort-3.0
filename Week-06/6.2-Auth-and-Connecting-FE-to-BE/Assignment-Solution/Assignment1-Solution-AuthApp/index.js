@@ -1,4 +1,4 @@
-const express = require;
+const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "Mateenchowdhary@123";
@@ -26,7 +26,7 @@ app.post("/signup", function (req, res) {
   });
 });
 
-app.post("signin", function (req, res) {
+app.post("/signin", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -56,6 +56,25 @@ app.post("signin", function (req, res) {
   }
 });
 
-app.get("/me", function (req, res) {});
+app.get("/me", function (req, res) {
+  const token = req.headers.token;
+
+  const decodedData = jwt.verify(token, JWT_SECRET);
+
+  if (decodedData) {
+    let foundUser = null;
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].username === decodedData.username) {
+        foundUser = users[i];
+      }
+    }
+
+    res.json({
+      username: foundUser.username,
+      password: foundUser.password,
+    });
+  }
+});
 
 app.listen(3000);

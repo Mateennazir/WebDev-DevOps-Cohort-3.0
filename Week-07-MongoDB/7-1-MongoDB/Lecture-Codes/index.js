@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Connect to the MongoDB database using the mongoose.connect() method
 mongoose.connect(
-  "mongodb+srv://muteebnazir8:9XFIvt0qEjEgY4yQ@admin1.l34fi.mongodb.net/"
+  "mongodb+srv://muteebnazir8:9XFIvt0qEjEgY4yQ@admin1.l34fi.mongodb.net/todo-app-database"
 );
 
 // Create a JWT_SECRET variable for the secret key
@@ -30,13 +30,13 @@ app.post("/signup", async function (req, res) {
 
   // Hash the password using the bcrypt.hash() method
   const hashedPassword = await bcrypt.hash(password, 5);
-  // console.log(hashedPassword);
+  console.log(hashedPassword);
 
   try {
     // Create a new user using the UserModel.create() method
     await UserModel.create({
       email: email,
-      password: password,
+      password: hashedPassword,
       name: name,
     });
   } catch (error) {

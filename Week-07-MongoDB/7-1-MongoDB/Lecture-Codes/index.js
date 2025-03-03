@@ -1,4 +1,5 @@
-// Import the express, mongoose, and jwt modules
+// Import the express, mongoose, and jwt modules and bcryp
+const bcrypt = require("bcrypt");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
@@ -26,6 +27,10 @@ app.post("/signup", async function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name;
+
+  // Hash the password using the bcrypt.hash() method
+  const hashedPassword = await bcrypt.hash(password, 5);
+  // console.log(hashedPassword);
 
   try {
     // Create a new user using the UserModel.create() method

@@ -60,11 +60,10 @@ app.post("/signin", async function (req, res) {
   // Find the user with the given email and password
   const user = await UserModel.findOne({
     email: email,
-    password: password,
   });
 
   // If the user is found, create a JWT token and send it to the client
-  if (user) {
+  if (!response) {
     // Create a JWT token using the jwt.sign() method
     const token = jwt.sign(
       {

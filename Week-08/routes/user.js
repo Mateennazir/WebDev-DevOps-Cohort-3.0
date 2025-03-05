@@ -7,19 +7,19 @@ const userRouter = Router();
 
 userRouter.post("/signup", (req, res) => {
   res.json({
-    message: "Hello World!",
+    message: "signed up",
   });
 });
 
-userRouter.post("/Signin", (req, res) => {
+userRouter.post("/signin", (req, res) => {
   res.json({
-    message: "Hello World!",
+    message: "Signed in",
   });
 });
 
-userRouter.get("/Purchases", (req, res) => {
+userRouter.get("/purchases", (req, res) => {
   res.json({
-    message: "Hello World!",
+    message: "pur",
   });
 });
 

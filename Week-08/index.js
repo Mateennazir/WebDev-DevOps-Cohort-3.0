@@ -1,35 +1,12 @@
 const express = require("express");
+const { CreateUserRoutes, userRouter } = require("./routes/user");
+const { CreateCourseRoutes, courseRouter } = require("./routes/course");
 const app = express();
-const port = 3000;
 
-app.post("/user/signup", (req, res) => {
-  res.json({
-    message: "Hello World!",
-  });
-});
+app.use("/user", userRouter);
+app.use("/course", courseRouter);
 
-app.post("/user/login", (req, res) => {
-  res.json({
-    message: "Hello World!",
-  });
-});
-
-app.get("/user/Purchases", (req, res) => {
-  res.json({
-    message: "Hello World!",
-  });
-});
-
-app.post("/course/Purchase", (req, res) => {
-  res.json({
-    message: "Hello World!",
-  });
-});
-
-app.get("/Courses", (req, res) => {
-  res.json({
-    message: "Hello World!",
-  });
-});
+CreateCourseRoutes(app);
+CreateUserRoutes(app);
 
 app.listen(3000);

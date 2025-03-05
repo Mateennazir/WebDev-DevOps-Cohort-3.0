@@ -41,6 +41,8 @@ app.post("/signup", async function (req, res) {
   // Parse the request body using the requireBody.safeParse() method to validate the data format
   const parseDataWithSuccess = requireBody.safeParse(req.body);
 
+  //1.How to show the user exact errors ==> Later
+
   // If the data format is incorrect, send an error message to the client
   if (!parseDataWithSuccess.success) {
     return res.json({

@@ -19,7 +19,7 @@ adminRouter.post("/course", (req, res) => {
     message: "Signed in",
   });
 });
-adminRouter.put("/course", (req, res) => {
+adminRouter.put("/", (req, res) => {
   res.json({
     message: "Signed in",
   });

@@ -19,7 +19,8 @@ const { userModel } = require("../db");
 // const { JWT_USER_PASSWORD } = require("../config");
 
 // Import necessary modules for handling JWT, password hashing, and schema validation
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const JWT_USER_PASSWORD = "ckhsakc14cds";
 const bcrypt = require("bcrypt");
 const zod = require("zod");
 
@@ -70,6 +71,32 @@ userRouter.post("/signup", async function (req, res) {
   res.status(201).json({
     message: "Signup Successful!", // Success message upon successful signup
   });
+});
+
+userRouter.post("/signin", async function (req, res) {
+  const { email, password } = req.body;
+
+  const user = await userModel.find({
+    email: email,
+    password: password,
+  });
+
+  if (user) {
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      JWT_USER_PASSWORD
+    );
+
+    res.json({
+      token: token,
+    });
+  } else {
+    res.status(403).json({
+      message: "incorrect Credentials",
+    });
+  }
 });
 
 // Export the userRouter so it can be imported and used in other parts of the application
